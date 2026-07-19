@@ -24,7 +24,7 @@ fitur_kolom = prep['fitur_kolom']
 st.sidebar.title("🎓 EduML Dashboard")
 st.sidebar.markdown("---")
 menu = st.sidebar.radio("Pilih Menu:", 
-                        ["Dashboard Analisis", "Prediksi (Model Demo)", "Evaluasi & Interpretasi"])
+                        ["Dashboard Analisis", "Prediksi (Model Demo)", "Evaluasi & Interpretasi", "Dokumentasi & Panduan"])
 
 if menu == "Dashboard Analisis":
     st.title("Dashboard Eksplorasi Data Mahasiswa")
@@ -109,4 +109,24 @@ elif menu == "Evaluasi & Interpretasi":
     Dalam kasus klasifikasi *dropout* pendidikan, metrik akurasi (*Accuracy*) bisa sangat menyesatkan karena data didominasi oleh mahasiswa yang lulus. 
     Oleh karena itu, performa dievaluasi menggunakan metrik **Recall**. Model difokuskan untuk meminimalkan *False Negative* 
     (menekan angka mahasiswa yang sebenarnya berisiko *dropout*, namun sistem menebaknya aman).
+    """)
+
+elif menu == "Dokumentasi & Panduan":
+    st.title("Dokumentasi Sistem")
+    
+    st.subheader("1. Deskripsi Dataset")
+    st.write("Aplikasi ini dibangun menggunakan dataset sekunder *Predict Students' Dropout and Academic Success* yang diunduh dari UCI Machine Learning Repository. Dataset ini mencakup rekam jejak demografi, kondisi sosial-ekonomi, dan performa akademik mahasiswa dari saat mendaftar hingga akhir semester kedua.")
+    
+    st.subheader("2. Metodologi (Machine Learning Pipeline)")
+    st.markdown("""
+    * **Prapemrosesan:** Transformasi data kategorikal menjadi numerik (*Label Encoding*) dan penyesuaian skala variabel (*Standard Scaling*).
+    * **Penanganan Bias:** Menggunakan teknik **SMOTE** (*Synthetic Minority Over-sampling Technique*) untuk memperbanyak sampel mahasiswa *dropout* secara sintetis agar seimbang dengan jumlah mahasiswa yang lulus.
+    * **Pemodelan:** Melatih data menggunakan algoritma **XGBoost** (*Extreme Gradient Boosting*) yang telah dioptimasi hyperparameternya melalui *GridSearchCV*.
+    """)
+    
+    st.subheader("3. Panduan Penggunaan Aplikasi")
+    st.markdown("""
+    * Buka menu **Dashboard Analisis** untuk melihat eksplorasi wawasan data historis.
+    * Buka menu **Prediksi (Model Demo)** dan masukkan profil akademik mahasiswa pada formulir yang disediakan. Klik tombol deteksi untuk melihat prediksi kecerdasan buatan.
+    * Buka menu **Evaluasi & Interpretasi** untuk melihat metrik performa model dan transparansi keputusan fitur (*SHAP values*).
     """)
