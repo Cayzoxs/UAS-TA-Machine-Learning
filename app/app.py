@@ -64,10 +64,15 @@ elif menu == "Prediksi (Model Demo)":
         submit_button = st.form_submit_button(label="🔍 Deteksi Potensi Dropout")
         
     if submit_button:
-        # Mengisi nilai default 0 untuk fitur lain yang tidak diinput manual (agar sesuai bentuk array XGBoost)
-        input_data = {col: 0 for col in fitur_kolom}
+        # 1. Inisialisasi awal (nilai aman/rata-rata, BUKAN 0 mutlak)
+        input_data = {}
+        for col in fitur_kolom:
+            if 'enrolled' in col.lower() or 'approved' in col.lower() or 'evaluations' in col.lower():
+                input_data[col] = 6 
+            else:
+                input_data[col] = 0 # Sisanya bisa diisi 0
         
-        # Update dengan nilai dari form
+        # 2. Update dengan nilai dari input form UI
         input_data['Curricular units 1st sem (grade)'] = grade1
         input_data['Curricular units 2nd sem (grade)'] = grade2
         input_data['Age at enrollment'] = age
@@ -75,17 +80,18 @@ elif menu == "Prediksi (Model Demo)":
         input_data['Tuition fees up to date'] = tuition
         input_data['Gender'] = gender
         
-        # Konversi ke DataFrame
+        # 3. Konversi ke DataFrame
         df_input = pd.DataFrame([input_data])
         
-        # Preprocessing (Scaling)
+        # 4. Preprocessing (Scaling)
         df_scaled = scaler.transform(df_input)
         df_scaled = pd.DataFrame(df_scaled, columns=fitur_kolom)
         
-        # Prediksi
+        # 5. Prediksi
         prediksi = model.predict(df_scaled)
         hasil_teks = le.inverse_transform(prediksi)[0]
         
+        # 6. Menampilkan Hasil
         st.markdown("---")
         if hasil_teks == 'Dropout':
             st.error("**HASIL PREDIKSI: RISIKO TINGGI DROPOUT!!!**")
