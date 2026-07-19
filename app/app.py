@@ -39,7 +39,7 @@ if menu == "Dashboard Analisis":
     """)
     st.info("Silakan buka menu 'Prediksi (Model Demo)' di sidebar kiri untuk mencoba kecerdasan buatan ini.")
 
-elif menu == "🔍 Prediksi (Model Demo)":
+elif menu == "Prediksi (Model Demo)":
     st.title("Simulasi Prediksi Mahasiswa Berisiko")
     st.write("Masukkan parameter akademik dan profil mahasiswa untuk mendeteksi potensi *dropout* sejak dini.")
     
