@@ -1,1 +1,9 @@
+# Mengabaikan folder cache Python
+__pycache__/
+*.pyc
 
+# Mengabaikan file sementara dari Jupyter Notebook / Colab
+.ipynb_checkpoints/
+
+# Mengabaikan file sistem operasi (jika menggunakan Mac)
+.DS_Store
