@@ -2,6 +2,9 @@ import streamlit as st
 import pandas as pd
 import pickle
 import os
+import warnings
+
+warnings.filterwarnings('ignore')
 
 st.set_page_config(page_title="EduML - Prediksi Dropout", page_icon="🎓", layout="wide")
 
